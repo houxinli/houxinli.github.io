@@ -6,20 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://houxinli.github.io">
-  <title>Kyrix101 | Xinli</title>
+  <title>Kyrix102 | Xinli</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="重拾Kyrix之前怠惰了很长一段时间了啊, 自从被选上开始, 刚开始一个月的时候配置了大概几个小时的时间去阅读, 终于在新加坡的DigitalOcean的机房里把Kyrix运行起来了. 之后就很长时间没有在碰过了, 时间一分一秒地流逝, 每周都给自己制定了计划, 但是这个项目的学习曲线确实有些陡峭… 主要是依赖和需要配置的东西太多了, 导致自己迟迟没能进入看代码写代码的状态. 今天又花了很长时间阅">
-<meta name="keywords" content="Kyrix,Visualization,Docker">
+  <meta name="description" content="Kyrix踩坑之路2: Docker @ Windows之前改了代码想要预览效果得先commit到github之后从远端pull再查看, 这也太麻烦了, 而且会造成commit多很多不必要的历史. 为了方便开发, 我还是想把Kyrix部署在本地, 既然文档里的建议是初学者使用Docker进行配置, 那我就尝试着在我的笔记本上跑Docker吧.">
+<meta name="keywords" content="Kyrix,Docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kyrix101">
-<meta property="og:url" content="http://houxinli.github.io/2019/05/21/Kyrix101/index.html">
+<meta property="og:title" content="Kyrix102">
+<meta property="og:url" content="http://houxinli.github.io/2019/05/23/Kyrix102/index.html">
 <meta property="og:site_name" content="Xinli">
-<meta property="og:description" content="重拾Kyrix之前怠惰了很长一段时间了啊, 自从被选上开始, 刚开始一个月的时候配置了大概几个小时的时间去阅读, 终于在新加坡的DigitalOcean的机房里把Kyrix运行起来了. 之后就很长时间没有在碰过了, 时间一分一秒地流逝, 每周都给自己制定了计划, 但是这个项目的学习曲线确实有些陡峭… 主要是依赖和需要配置的东西太多了, 导致自己迟迟没能进入看代码写代码的状态. 今天又花了很长时间阅">
+<meta property="og:description" content="Kyrix踩坑之路2: Docker @ Windows之前改了代码想要预览效果得先commit到github之后从远端pull再查看, 这也太麻烦了, 而且会造成commit多很多不必要的历史. 为了方便开发, 我还是想把Kyrix部署在本地, 既然文档里的建议是初学者使用Docker进行配置, 那我就尝试着在我的笔记本上跑Docker吧.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-23T01:00:33.850Z">
+<meta property="og:image" content="http://houxinli.github.io/2019/05/23/Kyrix102/2019/05/23/Kyrix102/1558515877627.png">
+<meta property="og:image" content="http://houxinli.github.io/2019/05/23/Kyrix102/1558515877627.png">
+<meta property="og:image" content="http://houxinli.github.io/2019/05/23/Kyrix102/2019/05/23/Kyrix102/1558571741288.png">
+<meta property="og:image" content="http://houxinli.github.io/2019/05/23/Kyrix102/1558571741288.png">
+<meta property="og:updated_time" content="2019-05-23T00:58:49.148Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kyrix101">
-<meta name="twitter:description" content="重拾Kyrix之前怠惰了很长一段时间了啊, 自从被选上开始, 刚开始一个月的时候配置了大概几个小时的时间去阅读, 终于在新加坡的DigitalOcean的机房里把Kyrix运行起来了. 之后就很长时间没有在碰过了, 时间一分一秒地流逝, 每周都给自己制定了计划, 但是这个项目的学习曲线确实有些陡峭… 主要是依赖和需要配置的东西太多了, 导致自己迟迟没能进入看代码写代码的状态. 今天又花了很长时间阅">
+<meta name="twitter:title" content="Kyrix102">
+<meta name="twitter:description" content="Kyrix踩坑之路2: Docker @ Windows之前改了代码想要预览效果得先commit到github之后从远端pull再查看, 这也太麻烦了, 而且会造成commit多很多不必要的历史. 为了方便开发, 我还是想把Kyrix部署在本地, 既然文档里的建议是初学者使用Docker进行配置, 那我就尝试着在我的笔记本上跑Docker吧.">
+<meta name="twitter:image" content="http://houxinli.github.io/2019/05/23/Kyrix102/2019/05/23/Kyrix102/1558515877627.png">
   
     <link rel="alternative" href="/atom.xml" title="Xinli" type="application/atom+xml">
   
@@ -141,37 +146,66 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Kyrix101" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Kyrix102" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Kyrix101
+      Kyrix102
     </h1>
   
 
         
-        <a href="/2019/05/21/Kyrix101/" class="archive-article-date">
-  	<time datetime="2019-05-21T14:32:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-21</time>
+        <a href="/2019/05/23/Kyrix102/" class="archive-article-date">
+  	<time datetime="2019-05-23T00:21:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="重拾Kyrix"><a href="#重拾Kyrix" class="headerlink" title="重拾Kyrix"></a>重拾Kyrix</h1><p>之前怠惰了很长一段时间了啊, 自从被选上开始, 刚开始一个月的时候配置了大概几个小时的时间去阅读, 终于在新加坡的DigitalOcean的机房里把Kyrix运行起来了. 之后就很长时间没有在碰过了, 时间一分一秒地流逝, 每周都给自己制定了计划, 但是这个项目的学习曲线确实有些陡峭… 主要是依赖和需要配置的东西太多了, 导致自己迟迟没能进入看代码写代码的状态. 今天又花了很长时间阅读各份说明, 然而还是没能成功地把 localhost:8000 给转移到USMap上去.</p>
+        <h1 id="Kyrix踩坑之路2-Docker-Windows"><a href="#Kyrix踩坑之路2-Docker-Windows" class="headerlink" title="Kyrix踩坑之路2: Docker @ Windows"></a>Kyrix踩坑之路2: Docker @ Windows</h1><p>之前改了代码想要预览效果得先commit到github之后从远端pull再查看, 这也太麻烦了, 而且会造成commit多很多不必要的历史. 为了方便开发, 我还是想把Kyrix部署在本地, 既然文档里的建议是初学者使用Docker进行配置, 那我就尝试着在我的笔记本上跑Docker吧.</p>
 <a id="more"></a>
-<p>之后每天写完之后还是写一下博客吧, 做一些摘抄学习, 写一下心得体会和记录一些问题, 这样子以后翻起来的时候也会方便一些. 可能是因为对Java还有很多虚拟机的东西不熟悉吧? 倒是有一些比如果Git的操作看起来没那么难. 那么闲尝试着再写一写代码吧, 然后再去问一下学长.</p>
-<p>今天遇到的主要问题:</p>
+<p>首先查了下 Docker + Windows, 得到的结果大概是 Docker for Windows 已经有了, 但是依赖于Windows 10 专业版 提供的 Hyper V, 而我的家庭版Win10并没有这玩意, 因此我只能像Win7, Win8一样用ToolBox虚拟机的方式安装运行Docker了</p>
+<p>首先, 根据菜鸟教程<a href="https://www.runoob.com/docker/windows-docker-install.html" target="_blank" rel="noopener">https://www.runoob.com/docker/windows-docker-install.html</a> 里给出的链接, 到<a href="http://mirrors.aliyun.com/docker-toolbox/windows/docker-toolbox/" target="_blank" rel="noopener">http://mirrors.aliyun.com/docker-toolbox/windows/docker-toolbox/</a> 阿里云的镜像站下载了CE版本的最高版本 (在另一篇博客里看到说CE是免费版). 下载安装之后, 在桌面直接双击运行却遇到了一个问题, Docker 报错 <strong>Looks like something went wrong in step ´Looking for vboxmanage.exe´..</strong></p>
+<p>查了一下这个问题, 也看到不少博客(如:<a href="https://www.cnblogs.com/ecology-lee/p/10017992.html" target="_blank" rel="noopener">https://www.cnblogs.com/ecology-lee/p/10017992.html</a>)大致都是跟路径, 环境变量有关的, 直接打开系统环境变量, 发现在系统变量里配置的是对的. 于是我想到可能是因为用户变量和系统变量之前的差别, 尝试以管理员身份运行, 果然成功了.</p>
+<img src="/2019/05/23/Kyrix102/2019/05/23/Kyrix102/1558515877627.png" title="Docker小鲸鱼">
+<p><img src="/2019/05/23/Kyrix102/1558515877627.png" alt></p>
+<p>接着, 直接cd到Kyrix目录下, docker-compose up, docker便自己开始跑Kyrix的运行配置了, 但是运行到了Step 2 的时候卡住了, 卡了很久之后我Ctrl + C然后突然弹出来了一堆输出之后继续卡, 于是我直接把窗口关了(此时在cmd窗口里使用docker ps会发现已经空了)</p>
+<p>然后我重新打开了一次docker的命令行, 但是这次我不知道怎么想的突然抽风了一下, 尝试在cmd里直接运行docker-compose up, 这次又下载了一遍…(我的流量)而且又卡住了…然而这次并不是我强制退出的, 在step 12处自己退出了. wget返回了非零值: 4.</p>
+<blockquote>
+<p>—&gt; Running in 4f01b36536af</p>
+<p>ERROR: Service ‘kyrix’ failed to build: The command ‘/bin/sh -c wget -q -O nba_db_psql.sql ‘<a href="https://www.dropbox.com/s/baqb01thxvfthk5/nba_db_psql.sql?dl=1&#39;&#39;" target="_blank" rel="noopener">https://www.dropbox.com/s/baqb01thxvfthk5/nba_db_psql.sql?dl=1&#39;&#39;</a> returned a non-zero code: 4</p>
+</blockquote>
+<p>失败了之后我自己通过浏览器方式直接下载到了<code>nba_db_psql.sql</code>.我想着能不能直接把这个文件放到容器里面去来解决我的问题呢? 傻乎乎的我直接放到了Kyrix的根目录下重新运行docker-compose. 果不其然, 我又失败了.</p>
+<p>此时我已经失败了很多次了, 而且把那俩dockerfile也翻来覆去地看了好多次了. 几乎陷入绝望的我正准备问学长, 突然我想到, 既然可以把docker容器看做一个微型的虚拟机, 那么是否应该用命令的方式把本地文件复制到虚拟机的路径当中? 我终于查到了 COPY ADD等命令然后发现, 诶, 这不就是Docker-file 里的命令吗? 通过一组Docker相关的博客的阅读, 我终于对于Docker的概念和结构有了一丢丢AC数, 强烈推荐这篇 <a href="https://blog.csdn.net/itguangit/article/details/80222387" target="_blank" rel="noopener">https://blog.csdn.net/itguangit/article/details/80222387</a> 能给我这种脑袋一团浆糊的小白对于Docker的镜像和容器一点点最基本的感性认知.</p>
+<p>重新写过Docker-file之后, 我发现Docker-Compose似乎并不会自动因为Docker-file的改变而自动生成新的image, 因此还需要把原来的image给彻底删掉. 删除的时候我先尝试了 <code>docker image rm kyrix_kyrix</code> 然而被提示说还有容器依赖于这个image, 因此我又找了一圈博客, 最后使用 –force 删除了镜像和所有依赖于它的容器.</p>
+<p>再次在Docker的bash(其实就是git for windows, 但是cmd也能运行docker的程序, 这两种运行方式之间到底有什么区别我现在还没搞清楚)中运行docker-compose up. 这次我本来有充足的信心, 结果又卡在了npm install上…我有点懵逼, 终止了这个container</p>
+<p>再来, 这次我直接跑在了cmd上, 这次又卡在了Step11, mvn上.</p>
+<p>再来, 还是cmd, 因为至少不是卡死在一个上, 而且docker的原理似乎是执行过一遍的步骤, 即使你后面的步骤执行的时候退出了, 也会执行得很快. 这一遍等了很久之后收到了提示</p>
+<blockquote>
+<p>WARNING: Image for service kyrix was built because it did not already exist. To rebuild this image you must use <code>docker-compose build</code> or <code>docker-compose up --build</code>.<br>Starting kyrix_db_1 … done</p>
+<p>Recreating kyrix_kyrix_1 … error</p>
+<p>ERROR: for kyrix_kyrix_1  no such image: sha256:94fdc60f5fe27399218934616723b0a72b6b4b64b1c0c83bb6c991f47d680457: No such image: sha256:94fdc60f5fe27399218934616723b0a72b6b4b64b1c0c83bb6c991f47d680457</p>
+<p>ERROR: for kyrix  no such image: sha256:94fdc60f5fe27399218934616723b0a72b6b4b64b1c0c83bb6c991f47d680457: No such image: sha256:94fdc60f5fe27399218934616723b0a72b6b4b64b1c0c83bb6c991f47d680457<br>ERROR: The image for the service you’re trying to recreate has been removed. If you continue, volume data could be lost. Consider backing up your data before continuing.</p>
+<p>Continue with the new image? [yN]</p>
+</blockquote>
+<p>我猜测应该是在重新生成容器的时候发现镜像已经被我删除过了…既然它提示我用 <code>docker-compose up --build</code>, 那我就用咯, 删掉镜像, 再来过.</p>
+<p>不过这次还是遇到了同样的问题. 我只能猜测docker-compose会在第一次成功执行的时候记录image的sha256码并且在之后build的时候匹配咯. 怀着忐忑的心情, 我再次输入y, 然后postgreSQL正常启动了, 虽然里面好像有一些看起来并不是很好的输出, 我还是硬着头皮打开了浏览器, 输入 localhost:8000, 没反应. 诶? 哦对, 好像docker启动的时候有看到默认的ip是192.168.99.100. 改ip之后再试一次. 诶? 还是不行? 这怎么办, 仔细又看了看pg输出</p>
+<blockquote>
+<p>2019-05-22 12:23:00.778 UTC [193] LOG:  listening on IPv4 address “0.0.0.0”, port 5432</p>
+</blockquote>
+<p>死马当作活马医吧, 0.0.0.0:8000 回车!</p>
+<img src="/2019/05/23/Kyrix102/2019/05/23/Kyrix102/1558571741288.png" title="终于跑起来了">
+<p><img src="/2019/05/23/Kyrix102/1558571741288.png" alt></p>
+<p>今日成果:</p>
 <ul>
-<li>如何让Kyrix跑另一个程序?</li>
-<li>如何修改运行配置文件?</li>
-<li>可以在Windows上装Docker跑这些东西吗?</li>
+<li>在本机上成功运行Kyrix</li>
+<li>对docker有了些基本的感性认知</li>
 </ul>
-<p>之前因为种种原因很长时间没有动这个Project了, 其实这才应该是我目前阶段最重要的Project呀! 希望能够用半个月重回正轨!</p>
-<p>Time: 4h</p>
+<p>Time: 6h</p>
 
       
 
@@ -186,10 +220,6 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Kyrix</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Visualization</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -249,7 +279,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://houxinli.github.io/2019/05/21/Kyrix101/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://houxinli.github.io/2019/05/23/Kyrix102/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -263,18 +293,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/05/23/Kyrix102/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/05/23/hexo102/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Kyrix102
+          hexo102
         
       </div>
     </a>
   
   
-    <a href="/2019/03/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2019/05/21/Kyrix101/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Kyrix101</div>
       <i class="icon-circle-right"></i>
     </a>
   
