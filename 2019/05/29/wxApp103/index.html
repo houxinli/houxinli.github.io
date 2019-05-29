@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://houxinli.github.io">
-  <title>Tag: wxApp | Xinli</title>
+  <title>wxApp103 | Xinli</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="侯昕李的博客, Hou Xinli&apos;s Blog, Zhejiang University">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xinli">
-<meta property="og:url" content="http://houxinli.github.io/tags/wxApp/index.html">
+  <meta name="description" content="微信小程序踩坑之路3: Canvas海报生成甲方要求做一个根据当前用户的数据, 生成一张”打卡”的图片的图片, 生成完毕之后再点一个按钮就可以保存图片到本地. 看了不少博客也踩了不少坑, 也算是最后实现了这个功能. 分享一下我踩过的坑和最后的实现方法吧, 希望能对你有所帮助">
+<meta name="keywords" content="weChat,wxApp,YumiMusic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wxApp103">
+<meta property="og:url" content="http://houxinli.github.io/2019/05/29/wxApp103/index.html">
 <meta property="og:site_name" content="Xinli">
-<meta property="og:description" content="侯昕李的博客, Hou Xinli&apos;s Blog, Zhejiang University">
+<meta property="og:description" content="微信小程序踩坑之路3: Canvas海报生成甲方要求做一个根据当前用户的数据, 生成一张”打卡”的图片的图片, 生成完毕之后再点一个按钮就可以保存图片到本地. 看了不少博客也踩了不少坑, 也算是最后实现了这个功能. 分享一下我踩过的坑和最后的实现方法吧, 希望能对你有所帮助">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://houxinli.github.io/2019/05/29/wxApp103/1559100283976.png">
+<meta property="og:updated_time" content="2019-05-29T12:28:06.441Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xinli">
-<meta name="twitter:description" content="侯昕李的博客, Hou Xinli&apos;s Blog, Zhejiang University">
+<meta name="twitter:title" content="wxApp103">
+<meta name="twitter:description" content="微信小程序踩坑之路3: Canvas海报生成甲方要求做一个根据当前用户的数据, 生成一张”打卡”的图片的图片, 生成完毕之后再点一个按钮就可以保存图片到本地. 看了不少博客也踩了不少坑, 也算是最后实现了这个功能. 分享一下我踩过的坑和最后的实现方法吧, 希望能对你有所帮助">
+<meta name="twitter:image" content="http://houxinli.github.io/2019/05/29/wxApp103/1559100283976.png">
   
     <link rel="alternative" href="/atom.xml" title="Xinli" type="application/atom+xml">
   
@@ -139,36 +143,85 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-wxApp103" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      wxApp103
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/wxApp103/" class="archive-article-date">
+
+        
+        <a href="/2019/05/29/wxApp103/" class="archive-article-date">
   	<time datetime="2019-05-29T12:17:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/wxApp103/">wxApp103</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="微信小程序踩坑之路3-Canvas海报生成"><a href="#微信小程序踩坑之路3-Canvas海报生成" class="headerlink" title="微信小程序踩坑之路3: Canvas海报生成"></a>微信小程序踩坑之路3: Canvas海报生成</h1><p>甲方要求做一个根据当前用户的数据, 生成一张”打卡”的图片的图片, 生成完毕之后再点一个按钮就可以保存图片到本地. 看了不少博客也踩了不少坑, 也算是最后实现了这个功能. 分享一下我踩过的坑和最后的实现方法吧, 希望能对你有所帮助</p>
+<a id="more"></a>
+<h3 id="实现目标"><a href="#实现目标" class="headerlink" title="实现目标"></a>实现目标</h3><p><img src="/2019/05/29/wxApp103/1559100283976.png" alt="1559100283976"></p>
+<h2 id="整体结构-amp-Pipeline"><a href="#整体结构-amp-Pipeline" class="headerlink" title="整体结构 &amp; Pipeline"></a>整体结构 &amp; Pipeline</h2><p>一开始我的想法很简单, 不是要在中间生成图吗, 既然实现的方法是先在canvas上画图, 而canvas又只支持本地图片, 那么肯定要先下载图片嘛, 正好也要给用户展示嘛, 那直接在页面中间画一画, 然后保存不就好了吗? 即pipeline按照</p>
+<ol>
+<li>wx.getImageInfo </li>
+<li>绘制</li>
+<li>wx.canvasToTempFilePath</li>
+<li>wx.saveImageToPhotosAlbum</li>
+</ol>
+<p>然而在我实现过一遍之后才发现, canvas在保存图像时的精度受到canvas的尺寸的限制, 只在中间使用canvas的结果就是极端的模糊. 无论是在展示端还是在保存成图片之后.</p>
+<p>之后我又看到了第二种方法, 使用两张canvas, 一张在屏幕外的完整尺寸图片, 一张在页面中心做展示, 在大的canvas画完之后, 保存成临时图片, 在画面中间的canvas使用ctx.drawImage画. 在将这种方法也实现了一遍之后, 我却发现中间用来预览 / 展示的canvas仍然很模糊, 而且canvas的使用本来就比较复杂, 需要生成context, 于是我又决定将中间用来展示 / 预览的canvas直接换成image, 在保存好临时文件之后通过 that.setData 改掉 image 的src来实现预览.</p>
+<p>于是, 最后我的逻辑流水线是</p>
+<ol>
+<li>wx.getImageInfo 下载背景图片</li>
+<li>wx.createConvasContext 创建context</li>
+<li>ctx.drawImage ctx.fillText 绘制</li>
+<li>wx.canvasToTempFilePath 保存临时文件</li>
+<li>that.setData 更改预览图片src</li>
+<li>wx.saveImageToPhotosAlbum 在保存图片按钮bindtap函数触发时, 将临时图片保存到本地相册</li>
+</ol>
+<h2 id="微信接口的Promise化"><a href="#微信接口的Promise化" class="headerlink" title="微信接口的Promise化"></a>微信接口的Promise化</h2><p>微信小程序的官方接口(即wx.getImageInfo)等方法大多数都会让你第一个参数传一个object, 如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wx.showToast(&#123;</span><br><span class="line">    title: <span class="string">'xxxx'</span>,</span><br><span class="line">    duration: <span class="number">2000</span>,</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"success"</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    fail: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"error"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这种写法虽然也不错, 不过和我们熟悉的ES6 Promise的写法还是略有不同, 不过微信小程序其实是支持ES6的, 而且可以ES6转ES5. 我发现一篇博客里面给出了一个可以将wx的接口Promise画的工具</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//utils.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * wxPromisify</span></span><br><span class="line"><span class="comment"> * @fn 传入的函数，如wx.request、wx.download</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">promisify</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">obj = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      obj.success = <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">        resolve(res)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      obj.fail = <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">        reject(res)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      fn(obj)<span class="comment">//执行函数，obj为传入函数的参数</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    promisify: promisify,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再在需要的地方引入并对微信端口进行封装即可使用我们常见的.then .catch啦</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> utils = <span class="built_in">require</span>(<span class="string">'../../utils/utils.js'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> wxCanvasToTempFilePath = utils.promisify(wx.canvasToTempFilePath)</span><br><span class="line"></span><br><span class="line"><span class="comment">//我按照背景图片</span></span><br><span class="line">wxCanvasToTempFilePath(&#123;</span><br><span class="line">	canvasId: <span class="string">'canvas'</span></span><br><span class="line">&#125;, <span class="keyword">this</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">// 保存成图片</span></span><br><span class="line">	d.tempFilePath = res.tempFilePath;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"res:"</span>, res);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"wxCanvasToTempFilePath err:"</span>, err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="Canvas的大小设置"><a href="#Canvas的大小设置" class="headerlink" title="Canvas的大小设置"></a>Canvas的大小设置</h2><p>我在画Canvas的时候第一次只用了中间一个很小的区域来画, 其结果是模糊不堪. 于是我想到在页面外用固定尺寸的Canvas绘制完之后保存成临时文件之后再以预览的方式绘制到页面中, 因为我的原图是w750*h1200的, 因此我在开发者工具上自定义了一个1080p的屏幕来展示效果, 当我完成了之后, 转移到开发者工具的iPhone 6模拟器上时, 发现中间显示的视口内容只包含左侧一半, 被横向拉宽以填满整个视口, 将图片保存下来也发现, 高度很高, 超过3000px, 然而宽度只有1080. 重复试验了几次之后, 我发现, 能够显示的宽度与设备有关, 当canvas画布的宽度超过设备的宽度时, 多出的部分将不会被绘制. 例如, 某手机的逻辑像素宽度为540px, 实际像素为1080px. 当你的Canvas宽度超过了540px时, 超出的部分将不会被绘制, 因此, Canvas的最大限制宽度为100% 或者说 750rpx. 超出这个宽度将无法正常渲染和显示.</p>
+<p>但是, 在使用canvasToTempFilePath时, 若不设定destWidth和destHeight, 将默认以逻辑像素:实际象素 = 1:1的方式保存, 此时, 会将canvas的逻辑像素转化成实际像素, 在刚才的例子中, 假设canvas宽度为750rpx, 也即540px逻辑像素, 保存下来的图片会只有540px实际象素, 图片宽度只有设备的一半, 会很不清晰. 对此, 一个解决方法是, 通过wx.getSystemInfo的方式, 获取用户设备的逻辑像素值和实际像素:逻辑像素的比值, 通过这两者的结合, 使得canvas能够完整绘制, 保存时又尽可能保留较高精度. 另, 为了保证保存图片时, 绘制已经完成, 应该在ctx.draw的回调函数里保存canvas到临时文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> systemInfo = wx.getSystemInfoSync();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"systemInfo:"</span>, systemInfo);</span><br><span class="line"><span class="keyword">let</span> windowWidth = systemInfo.windowWidth;</span><br><span class="line"><span class="keyword">const</span> pixelRatio = systemInfo.pixelRatio;</span><br><span class="line"><span class="comment">// iPhone X windowWidth 375, 1px = 2rpx</span></span><br><span class="line"><span class="comment">// 获取rpx到px的映射关系</span></span><br><span class="line"><span class="keyword">const</span> rpx2px = windowWidth / <span class="number">750</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ctx = wx.createCanvasContext(<span class="string">'realCanvas'</span>)</span><br><span class="line"></span><br><span class="line">ctx.drawImage(avatarFile.path, <span class="number">85</span>*rpx2px, <span class="number">376</span>*rpx2px, <span class="number">117</span>*rpx2px, <span class="number">117</span>*rpx2px);</span><br><span class="line">ctx.draw(<span class="literal">false</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    wxCanvasToTempFilePath(&#123;</span><br><span class="line">        destWidth: <span class="number">750</span>*rpx2px*pixelRatio,</span><br><span class="line">        destHeight: <span class="number">1200</span>*rpx2px*pixelRatio,</span><br><span class="line">        canvasId: <span class="string">'realCanvas'</span></span><br><span class="line">    &#125;, <span class="keyword">this</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 保存成图片</span></span><br><span class="line">        d.tempFilePath = res.tempFilePath;</span><br><span class="line">    &#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"wxCanvasToTempFilePath err:"</span>, err)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="保存图片时请求写入文件权限"><a href="#保存图片时请求写入文件权限" class="headerlink" title="保存图片时请求写入文件权限"></a>保存图片时请求写入文件权限</h2><p>这个部分我是复制的别人的代码, 忘了具体是哪里来的了, 就简单地粘贴一下吧</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">wx.saveImageToPhotosAlbum(&#123;</span><br><span class="line">    filePath: that.data.tempFilePath,</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">s_data</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"s_data:"</span>, s_data);</span><br><span class="line">        wx.hideLoading();</span><br><span class="line">        wx.showToast(&#123;</span><br><span class="line">            title: <span class="string">'已保存到相册'</span>,</span><br><span class="line">            duration: <span class="number">2000</span>,</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    fail:<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        wx.hideLoading();</span><br><span class="line">        <span class="built_in">console</span>.log(err);</span><br><span class="line">        <span class="keyword">if</span> (err.errMsg === <span class="string">"saveImageToPhotosAlbum:fail auth deny"</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"用户一开始拒绝了，我们想再次发起授权"</span>)</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'打开设置窗口'</span>)</span><br><span class="line">            wx.openSetting(&#123;</span><br><span class="line">                success(settingdata) &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(settingdata)</span><br><span class="line">                    <span class="keyword">if</span> (settingdata.authSetting[<span class="string">'scope.writePhotosAlbum'</span>])</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="built_in">console</span>.log(<span class="string">'获取权限成功，给出再次保存到相册的提示。'</span>)</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="built_in">console</span>.log(<span class="string">'获取权限失败，给出不给权限就无法使用的提示'</span>)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(err.errMsg === <span class="string">"saveImageToPhotosAlbum:fail cancel"</span>)&#123;</span><br><span class="line">            wx.showToast(&#123;</span><br><span class="line">                icon: <span class="string">"none"</span>,</span><br><span class="line">                title: <span class="string">'保存被取消'</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="踩坑列表"><a href="#踩坑列表" class="headerlink" title="踩坑列表"></a>踩坑列表</h2><ul>
+<li>ctx.drawImage方法在开发者工具里可以直接画网络图片, 然而在真机上不行</li>
+<li>保存图片精度受到原始canvas限制, 建议使用canvas+image方案</li>
+<li><p>在ctx.draw回调里保存图片才能确保保存下来的图片是绘制完毕的, 不然有可能会保存下来一张啥都没有的透明图片</p>
+</li>
+<li><p>Canvas宽度不能超过用户手机的真实像素宽度(可以大致理解为不能超过750rpx)</p>
+</li>
+<li>画图时如需网络图片需要确定将图床域名添加到可信任的域名列表中.(Image可以直接引用网络图片, 但是因为画图必须保存到本地, wx.getImageInfo和wx.downloadFile需要这个设置)</li>
+<li>在Canvas中一切都要靠手动调整, 没有自动换行也没有自动居中, 要想把字画的漂亮, 若涉及到跨行, 建议手动进行分行. 至于数字有不同位数时的居中, 我的方法是使用等宽字体+判断位数, 根据位数调整fillText时的x值</li>
+</ul>
+<p>转载请注明出处, 欢迎联系我: <a href="mailto:houxinli@hotmail.com" target="_blank" rel="noopener">houxinli@hotmail.com</a></p>
+<h1 id="参考Blog列表"><a href="#参考Blog列表" class="headerlink" title="参考Blog列表"></a>参考Blog列表</h1><ul>
+<li><a href="https://www.jianshu.com/p/ceb42fe76e77" target="_blank" rel="noopener">https://www.jianshu.com/p/ceb42fe76e77</a> 流水线</li>
+<li><a href="https://segmentfault.com/a/1190000016039298" target="_blank" rel="noopener">https://segmentfault.com/a/1190000016039298</a> 画图, 流水线</li>
+<li><a href="https://blog.csdn.net/quankecai/article/details/79167469" target="_blank" rel="noopener">https://blog.csdn.net/quankecai/article/details/79167469</a> 保存canvas</li>
+<li><a href="https://blog.csdn.net/zkn_2439656793/article/details/78039924" target="_blank" rel="noopener">https://blog.csdn.net/zkn_2439656793/article/details/78039924</a> 保存网络图片</li>
+<li><a href="https://www.cnblogs.com/till-the-end/p/8465970.html" target="_blank" rel="noopener">https://www.cnblogs.com/till-the-end/p/8465970.html</a> Promise封装wx的方法</li>
+<li><a href="https://blog.csdn.net/u012468376/article/details/73350998" target="_blank" rel="noopener">https://blog.csdn.net/u012468376/article/details/73350998</a> Canvas 绘制</li>
+</ul>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -188,111 +241,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://houxinli.github.io/2019/05/29/wxApp103/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/28/wxApp102/" class="archive-article-date">
-  	<time datetime="2019-05-28T08:34:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-28</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/28/wxApp102/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">wxApp102</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/28/wxApp102/">wxApp102</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">weChat</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">wxApp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">YumiMusic</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/28/wxApp101/" class="archive-article-date">
-  	<time datetime="2019-05-28T03:11:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/28/wxApp101/">wxApp101</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">weChat</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">wxApp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">YumiMusic</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -315,9 +363,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
