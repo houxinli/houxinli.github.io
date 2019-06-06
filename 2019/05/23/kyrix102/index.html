@@ -6,27 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://houxinli.github.io">
-  <title>Kyrix102 | Xinli</title>
+  <title>Kyrix102 | Xinli&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Kyrix踩坑之路2: Docker @ Windows之前改了代码想要预览效果得先commit到github之后从远端pull再查看, 这也太麻烦了, 而且会造成commit多很多不必要的历史. 为了方便开发, 我还是想把Kyrix部署在本地, 既然文档里的建议是初学者使用Docker进行配置, 那我就尝试着在我的笔记本上跑Docker吧.">
 <meta name="keywords" content="Kyrix,Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kyrix102">
 <meta property="og:url" content="http://houxinli.github.io/2019/05/23/Kyrix102/index.html">
-<meta property="og:site_name" content="Xinli">
+<meta property="og:site_name" content="Xinli&#39;s Blog">
 <meta property="og:description" content="Kyrix踩坑之路2: Docker @ Windows之前改了代码想要预览效果得先commit到github之后从远端pull再查看, 这也太麻烦了, 而且会造成commit多很多不必要的历史. 为了方便开发, 我还是想把Kyrix部署在本地, 既然文档里的建议是初学者使用Docker进行配置, 那我就尝试着在我的笔记本上跑Docker吧.">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://houxinli.github.io/2019/05/23/Kyrix102/2019/05/23/Kyrix102/1558515877627.png">
 <meta property="og:image" content="http://houxinli.github.io/2019/05/23/Kyrix102/1558515877627.png">
-<meta property="og:image" content="http://houxinli.github.io/2019/05/23/Kyrix102/2019/05/23/Kyrix102/1558571741288.png">
 <meta property="og:image" content="http://houxinli.github.io/2019/05/23/Kyrix102/1558571741288.png">
-<meta property="og:updated_time" content="2019-05-23T00:58:49.148Z">
+<meta property="og:updated_time" content="2019-06-06T13:10:48.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kyrix102">
 <meta name="twitter:description" content="Kyrix踩坑之路2: Docker @ Windows之前改了代码想要预览效果得先commit到github之后从远端pull再查看, 这也太麻烦了, 而且会造成commit多很多不必要的历史. 为了方便开发, 我还是想把Kyrix部署在本地, 既然文档里的建议是初学者使用Docker进行配置, 那我就尝试着在我的笔记本上跑Docker吧.">
-<meta name="twitter:image" content="http://houxinli.github.io/2019/05/23/Kyrix102/2019/05/23/Kyrix102/1558515877627.png">
+<meta name="twitter:image" content="http://houxinli.github.io/2019/05/23/Kyrix102/1558515877627.png">
   
-    <link rel="alternative" href="/atom.xml" title="Xinli" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Xinli&#39;s Blog" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -171,7 +169,6 @@
 <p>首先查了下 Docker + Windows, 得到的结果大概是 Docker for Windows 已经有了, 但是依赖于Windows 10 专业版 提供的 Hyper V, 而我的家庭版Win10并没有这玩意, 因此我只能像Win7, Win8一样用ToolBox虚拟机的方式安装运行Docker了</p>
 <p>首先, 根据菜鸟教程<a href="https://www.runoob.com/docker/windows-docker-install.html" target="_blank" rel="noopener">https://www.runoob.com/docker/windows-docker-install.html</a> 里给出的链接, 到<a href="http://mirrors.aliyun.com/docker-toolbox/windows/docker-toolbox/" target="_blank" rel="noopener">http://mirrors.aliyun.com/docker-toolbox/windows/docker-toolbox/</a> 阿里云的镜像站下载了CE版本的最高版本 (在另一篇博客里看到说CE是免费版). 下载安装之后, 在桌面直接双击运行却遇到了一个问题, Docker 报错 <strong>Looks like something went wrong in step ´Looking for vboxmanage.exe´..</strong></p>
 <p>查了一下这个问题, 也看到不少博客(如:<a href="https://www.cnblogs.com/ecology-lee/p/10017992.html" target="_blank" rel="noopener">https://www.cnblogs.com/ecology-lee/p/10017992.html</a>)大致都是跟路径, 环境变量有关的, 直接打开系统环境变量, 发现在系统变量里配置的是对的. 于是我想到可能是因为用户变量和系统变量之前的差别, 尝试以管理员身份运行, 果然成功了.</p>
-<img src="/2019/05/23/Kyrix102/2019/05/23/Kyrix102/1558515877627.png" title="Docker小鲸鱼">
 <p><img src="/2019/05/23/Kyrix102/1558515877627.png" alt></p>
 <p>接着, 直接cd到Kyrix目录下, docker-compose up, docker便自己开始跑Kyrix的运行配置了, 但是运行到了Step 2 的时候卡住了, 卡了很久之后我Ctrl + C然后突然弹出来了一堆输出之后继续卡, 于是我直接把窗口关了(此时在cmd窗口里使用docker ps会发现已经空了)</p>
 <p>然后我重新打开了一次docker的命令行, 但是这次我不知道怎么想的突然抽风了一下, 尝试在cmd里直接运行docker-compose up, 这次又下载了一遍…(我的流量)而且又卡住了…然而这次并不是我强制退出的, 在step 12处自己退出了. wget返回了非零值: 4.</p>
@@ -198,14 +195,18 @@
 <p>2019-05-22 12:23:00.778 UTC [193] LOG:  listening on IPv4 address “0.0.0.0”, port 5432</p>
 </blockquote>
 <p>死马当作活马医吧, 0.0.0.0:8000 回车!</p>
-<img src="/2019/05/23/Kyrix102/2019/05/23/Kyrix102/1558571741288.png" title="终于跑起来了">
-<p><img src="/2019/05/23/Kyrix102/1558571741288.png" alt></p>
+<p><img src="/2019/05/23/Kyrix102/1558571741288.png" alt="终于跑起来了"></p>
 <p>今日成果:</p>
 <ul>
-<li>在本机上成功运行Kyrix</li>
+<li>在本机上成功运行Kyrix (失败了其实)</li>
 <li>对docker有了些基本的感性认知</li>
 </ul>
 <p>Time: 6h</p>
+<h2 id="More-of-Docker"><a href="#More-of-Docker" class="headerlink" title="More of Docker"></a>More of Docker</h2><p>当我在没有运行跑Docker的虚拟机就在cmd里使用docker指令时, 得到了这样的输出</p>
+<blockquote>
+<p>>docker container ls<br>error during connect: Get <a href="https://192.168.99.100:2376/v1.37/containers/json" target="_blank" rel="noopener">https://192.168.99.100:2376/v1.37/containers/json</a>: dial tcp 192.168.99.100:2376: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.</p>
+</blockquote>
+<p>所以现在我现在的认知是docker通过Toolbox的虚拟机运行时指令的调用方式大概类似于一个一直连接着192.168.99.100的ssh, 输入docker的指令会自动连接到Docker虚拟机的接口上.</p>
 
       
 
@@ -442,10 +443,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Visualization</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -459,6 +456,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">YumiMusic</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Visualization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">PostgreSQL</a>
               </li>
             
             <div class="clearfix"></div>

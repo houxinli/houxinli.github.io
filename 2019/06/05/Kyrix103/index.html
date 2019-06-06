@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://houxinli.github.io">
-  <title>Archives: 2019/3 | Xinli&#39;s Blog</title>
+  <title>Kyrix103 | Xinli&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="侯昕李的博客, Hou Xinli&apos;s Blog, Zhejiang University">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xinli&#39;s Blog">
-<meta property="og:url" content="http://houxinli.github.io/archives/2019/03/index.html">
+  <meta name="description" content="Kyrix踩坑之路3上一次成功地在我的PC上把Kyrix跑起来了, 不过我对Docker和Kyrix还是知之甚少, 慢慢记录一些在学习过程当中遇到的坑和捡到的贝壳吧 [更新: 最近发现, 上一次我还是没有成功在我的pc上把Kyrix跑起来! 上一次在0.0.0.0:8000成功运行的]">
+<meta name="keywords" content="Kyrix,Docker,PostgreSQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kyrix103">
+<meta property="og:url" content="http://houxinli.github.io/2019/06/05/Kyrix103/index.html">
 <meta property="og:site_name" content="Xinli&#39;s Blog">
-<meta property="og:description" content="侯昕李的博客, Hou Xinli&apos;s Blog, Zhejiang University">
+<meta property="og:description" content="Kyrix踩坑之路3上一次成功地在我的PC上把Kyrix跑起来了, 不过我对Docker和Kyrix还是知之甚少, 慢慢记录一些在学习过程当中遇到的坑和捡到的贝壳吧 [更新: 最近发现, 上一次我还是没有成功在我的pc上把Kyrix跑起来! 上一次在0.0.0.0:8000成功运行的]">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-06T13:11:16.481Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xinli&#39;s Blog">
-<meta name="twitter:description" content="侯昕李的博客, Hou Xinli&apos;s Blog, Zhejiang University">
+<meta name="twitter:title" content="Kyrix103">
+<meta name="twitter:description" content="Kyrix踩坑之路3上一次成功地在我的PC上把Kyrix跑起来了, 不过我对Docker和Kyrix还是知之甚少, 慢慢记录一些在学习过程当中遇到的坑和捡到的贝壳吧 [更新: 最近发现, 上一次我还是没有成功在我的pc上把Kyrix跑起来! 上一次在0.0.0.0:8000成功运行的]">
   
     <link rel="alternative" href="/atom.xml" title="Xinli&#39;s Blog" type="application/atom+xml">
   
@@ -139,49 +141,197 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Kyrix103" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/22/hello-world/" class="archive-article-date">
-  	<time datetime="2019-03-21T19:04:03.915Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-22</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/22/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      Kyrix103
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+        
+        <a href="/2019/06/05/Kyrix103/" class="archive-article-date">
+  	<time datetime="2019-06-05T13:38:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Kyrix踩坑之路3"><a href="#Kyrix踩坑之路3" class="headerlink" title="Kyrix踩坑之路3"></a>Kyrix踩坑之路3</h1><p>上一次成功地在我的PC上把Kyrix跑起来了, 不过我对Docker和Kyrix还是知之甚少, 慢慢记录一些在学习过程当中遇到的坑和捡到的贝壳吧</p>
+<p>[更新: 最近发现, 上一次我还是没有成功在我的pc上把Kyrix跑起来! 上一次在0.0.0.0:8000成功运行的]</p>
+<a id="more"></a>
+<p>[TOC]</p>
+<h2 id="成功修改前端renderer"><a href="#成功修改前端renderer" class="headerlink" title="成功修改前端renderer"></a>成功修改前端renderer</h2><p>###直接在运行中的docker容器里修改文件</p>
+<p>在远端运行起来docker的服务器上, 通过直接使用<code>docker exec -it kyrix_kyrix_1 /bin/sh</code>命令进入docker的shell, 然后使用vim修改文件, 然后进入/kyrix/compiler/example/nba, 直接运行node nba.js 就可重新生成 Kyrix App, 此时查看修改, 就已经应用成功</p>
+<p>###通过SFTP + docker cp的方式尽可能简单地修改Kyrix文件</p>
+<p><a href="https://blog.csdn.net/md1688/article/details/80957952" target="_blank" rel="noopener">https://blog.csdn.net/md1688/article/details/80957952</a> 根据这篇博文的内容下载 SFTP插件并且配置好 map to remote (将原来的Kyrix文件夹删掉, 放弃使用 Git进行同步, 转而使用SFTP)</p>
+<p>这样子本地保存了文件之后, Sublime会自动将改变同步到之后在远程宿主机上的文件.</p>
+<p>根据这篇回答 <a href="https://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container" target="_blank" rel="noopener">https://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container</a></p>
+<p>写了一个简单的批处理命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash</span></span><br><span class="line"></span><br><span class="line">docker cp compiler/examples/. bcd:/kyrix/compiler/examples/.</span><br></pre></td></tr></table></figure>
+<p>之后chmod 777 ./x.sh, 运行</p>
+<p>这里还出了点小问题</p>
+<p>根据这篇博客 <a href="https://blog.csdn.net/hxpjava1/article/details/79711710" target="_blank" rel="noopener">https://blog.csdn.net/hxpjava1/article/details/79711710</a></p>
+<p>使用dos2unix解决格式问题</p>
+<p>之后只需要在保存之后运行 x.sh 即可保存文件到docker容器当中.</p>
+<p>虽然在 Development 文档中提到前端改变不需要重启, 但是renderer相关的似乎还是需要重启应用才行.在docker容器的shell中cd到需要重启应用的目录, 运行 <code>node nba.js</code> 即可重启应用, 此时刷新浏览器便可更新样式</p>
+<h2 id="PostgreSQL-数据库"><a href="#PostgreSQL-数据库" class="headerlink" title="PostgreSQL 数据库"></a>PostgreSQL 数据库</h2><p>由于以前没有接触过PostgreSQL数据库, 所以这里还是踩了不少坑, 花了很多个小时, 最后还是正常连上了, 从头开始记录一下我的PostgreSQL踩坑之路吧</p>
+<p>###在本地安装PostgreSQL和PgAdmin</p>
+<p>根据这篇博客 <a href="https://www.cnblogs.com/sharpest/p/6225028.html" target="_blank" rel="noopener">https://www.cnblogs.com/sharpest/p/6225028.html</a> 在这篇文章中提到的 <a href="http://www.enterprisedb.com/products-services-training/pgdownload" target="_blank" rel="noopener">http://www.enterprisedb.com/products-services-training/pgdownload</a> 地址下载的postgreSQL安装器在安装完成之后会自动打开 stack installer, 帮助安装postGIS等.</p>
+<h3 id="踩坑远端的Docker-PostgreSQL"><a href="#踩坑远端的Docker-PostgreSQL" class="headerlink" title="踩坑远端的Docker PostgreSQL"></a>踩坑远端的Docker PostgreSQL</h3><p>首先, 进入Docker的shell <code>docker exec -it kyrix_db_1 /bin/bash</code></p>
+<p>然而 kartoza/postgis:11.0-2.5 里面vim是不能直接使用的, 这简直要了亲命了, 为了使得直接使用命令行能访问地方便, 需要修改pg_hba.conf等文件, 但是没有vim就很难受, 所以首先需要做的是 <code>apt install vim</code></p>
+<p>由于通过Docker命令在默认参数时进入postgres的用户会和你ssh登录的服务器用户一致, 也就是说一般是root, 然而postgres默认的用户是postgres, 而没有 root 这个用户, 所以想要进入psql界面, 直接使用psql是不行的, 而且psql如果不带参数, 默认后面会接上本机的用户名, 也就是说会报错说root不是一个数据库. 一个比较trick的方法是 <code>su - postgres</code> 使用这个指令之后会切换用户到postgres, 此时直接使用psql会进入psql命令行, 显示的是<code>postgres=#</code>在这个状态下, 实际上发生的是 <strong>以postgres用户管理postgres数据库</strong>, 此时便有一些基本的postgres命令可用了. 这些命令都以<code>\</code>开头:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\l #显示所有数据库</span><br><span class="line">\du #显示所有用户</span><br><span class="line">\c #切换数据库和用户, 若无参数会显示当前用户和数据库, 使用方式举例: \c database user</span><br><span class="line">\h 获得postgres帮助</span><br><span class="line">\q 退出psql命令行</span><br></pre></td></tr></table></figure>
+<p>###在PostgreSQL中进行用户管理</p>
+<p>在运行着PostgreSQL的主机/虚拟机/Docker上使用命令行进行各种操作时, 都有两种方式可以选择:</p>
+<ol>
+<li>在shell里, psql命令行外直接操作</li>
+<li>在psql里使用psql指令操作</li>
+</ol>
+<p>在这里我主要记录一下第二种方式, psql命令正则化比较强, 命令可以互相搭配, 我尝试用我使用到的例子来记录一下常见的操作</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 大部分指令好像大小写无关, 但我也没有具体完全测试过</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> mydb <span class="comment">--创建数据库</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> lalala <span class="keyword">WITH</span> <span class="keyword">password</span> <span class="string">'fafafa'</span> <span class="comment">--创建用户</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> lalala <span class="keyword">WITH</span> SUPERUSER <span class="comment">--赋予超级用户权限</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> lalaladb OWNER lalala <span class="comment">--以某用户身份创建数据库</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">ON</span> <span class="keyword">DATABASE</span> mydb <span class="keyword">TO</span> lalala <span class="comment">--给予所有权限</span></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> <span class="keyword">DATABASE</span> mydb <span class="keyword">TO</span> lalala <span class="comment">--暂时还没搞清楚这一条和上一条的区别</span></span><br></pre></td></tr></table></figure>
+<p>在创建完自己的用户之后, 如果尝试使用\c指令切换用户的话, 可能会遇到 Peer authentication failure的问题, 请参考</p>
+<p><a href="https://stackoverflow.com/questions/18664074/getting-error-peer-authentication-failed-for-user-postgres-when-trying-to-ge" target="_blank" rel="noopener">https://stackoverflow.com/questions/18664074/getting-error-peer-authentication-failed-for-user-postgres-when-trying-to-ge</a></p>
+<p><a href="https://blog.csdn.net/wangyezi19930928/article/details/20358369" target="_blank" rel="noopener">https://blog.csdn.net/wangyezi19930928/article/details/20358369</a></p>
+<p>####关于用户权限管理</p>
+<p><a href="https://www.cnblogs.com/zhangeamon/p/8990232.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhangeamon/p/8990232.html</a> PostgreSQL 用户和权限管理</p>
+<p><a href="https://blog.csdn.net/pg_hgdb/article/details/79755116" target="_blank" rel="noopener">https://blog.csdn.net/pg_hgdb/article/details/79755116</a> psql 参数或\c命令 切换用户</p>
+<p>###PgAdmin远程登录Docker中的PostgreSQL</p>
+<p><a href="https://blog.csdn.net/oliveryp/article/details/82494541" target="_blank" rel="noopener">https://blog.csdn.net/oliveryp/article/details/82494541</a></p>
+<p>按照这篇文章的叙述进行配置即可</p>
+<p>其他参考:</p>
+<p>阮一峰的教程 <a href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html</a></p>
 
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Kyrix</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">PostgreSQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://houxinli.github.io/2019/06/05/Kyrix103/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/05/29/wxApp103/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">wxApp103</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -204,8 +354,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
