@@ -8,17 +8,18 @@
   <link rel="dns-prefetch" href="http://houxinli.github.io">
   <title>Kyrix202 | Xinli&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="侯昕李的博客, Hou Xinli&apos;s Blog, Zhejiang University">
+  <meta name="description" content="Kyrix 求生之路2: PredicatePredicate, 中文可以翻译为谓语, 但是在Kyrix的语境中, 我认为一个更贴切的翻译应该是 “条件”. 在Kyrix中, predicate的主要作用是限制返回的结果, 类似于一个“filter”, 满足条件的结果将会被返回. 在API Reference中, 对predicate的解释比较不充分">
+<meta name="keywords" content="Kyrix,Visualization,d3">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kyrix202">
 <meta property="og:url" content="http://houxinli.github.io/2019/06/17/Kyrix202/index.html">
 <meta property="og:site_name" content="Xinli&#39;s Blog">
-<meta property="og:description" content="侯昕李的博客, Hou Xinli&apos;s Blog, Zhejiang University">
+<meta property="og:description" content="Kyrix 求生之路2: PredicatePredicate, 中文可以翻译为谓语, 但是在Kyrix的语境中, 我认为一个更贴切的翻译应该是 “条件”. 在Kyrix中, predicate的主要作用是限制返回的结果, 类似于一个“filter”, 满足条件的结果将会被返回. 在API Reference中, 对predicate的解释比较不充分">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-17T15:14:36.876Z">
+<meta property="og:updated_time" content="2019-06-24T13:47:35.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kyrix202">
-<meta name="twitter:description" content="侯昕李的博客, Hou Xinli&apos;s Blog, Zhejiang University">
+<meta name="twitter:description" content="Kyrix 求生之路2: PredicatePredicate, 中文可以翻译为谓语, 但是在Kyrix的语境中, 我认为一个更贴切的翻译应该是 “条件”. 在Kyrix中, predicate的主要作用是限制返回的结果, 类似于一个“filter”, 满足条件的结果将会被返回. 在API Reference中, 对predicate的解释比较不充分">
   
     <link rel="alternative" href="/atom.xml" title="Xinli&#39;s Blog" type="application/atom+xml">
   
@@ -160,7 +161,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="Kyrix-求生之路2-Predicate"><a href="#Kyrix-求生之路2-Predicate" class="headerlink" title="Kyrix 求生之路2: Predicate"></a>Kyrix 求生之路2: Predicate</h1><p>Predicate, 中文可以翻译为谓语, 但是在Kyrix的语境中, 我认为一个更贴切的翻译应该是 “条件”. 在Kyrix中, predicate的主要作用是限制返回的结果, 类似于一个“filter”, 满足条件的结果将会被返回. 在API Reference中, 对predicate的解释比较不充分</p>
+<a id="more"></a>
+<h2 id="简单静态-Predicate"><a href="#简单静态-Predicate" class="headerlink" title="简单静态 Predicate"></a>简单静态 Predicate</h2><p>以下是API中这段叙述</p>
+<blockquote>
+<p><em>project.<strong>setInitialStates</strong>(view, initial_canvas, initial_viewport_x, initial_viewport_y, initial_predicates)</em><a href="https://github.com/tracyhenry/Kyrix/blob/master/compiler/src/index.js#L148" target="_blank" rel="noopener">&lt;&gt;</a></p>
+<p>Sets the initial states of a view, including an initial canvas (<code>initial_canvas</code>) to show in the view when the app is first loaded, the canvas coordinates (<code>initial_viewport_x</code> and <code>initial_viewport_y</code>) of the top left-hand corner of the view, and a predicate object (<code>initial_predicates</code>) used to filter the <a href="https://github.com/tracyhenry/Kyrix/wiki/API-Reference#transform" target="_blank" rel="noopener">transform</a> of the <a href="https://github.com/tracyhenry/Kyrix/wiki/API-Reference#layer" target="_blank" rel="noopener">layers</a> on the initial canvas. This predicate (optional) should be specified as a JS object mapping layers to binary AND/OR/EQ expression trees. Consider the following example.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; p.setInitialStates(leftView, employeeCanvas, <span class="number">300</span>, <span class="number">400</span>, &#123;<span class="string">"layer0"</span> : &#123;<span class="string">"=="</span> : [<span class="string">"age"</span>, <span class="number">30</span>]&#125;&#125;);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>其中对predicate写法的描述是</p>
+<blockquote>
+<p>a JS object mapping layers to binary AND/OR/EQ expression trees.</p>
+<p><code>{&quot;layer0&quot; : {&quot;==&quot; : [&quot;age&quot;, 30]}}</code></p>
+</blockquote>
+<p>这个看上去有点没头没脑的, 第一次拿到的时候比较难懂, 下面我根据我的实验说一下我的理解.</p>
+<p>首先, 一个predicate是一个JS的Object, 一个predicate与一个canvas相关联, 也就是说, 在调用<code>project.setInitialStates</code>这个函数时, 整个predicate会被拿来约束employeeCanvas的内容. 在predicate内部, 由于每一层(Layer)都和一个不同的transform绑定, 所以每一层的约束就是一个小的对象, 而由于层是没有通过字符串名字的, 所以只是<strong>通过<code>canvas.addLayer</code>被调用的顺序来决定是layer0, layer1…</strong>至于predicate的内部约束方法, 还是比较直观, 依葫芦画瓢就行, 不过有一点要注意的是, <strong>predicate当中的字段(field, 如这里的”age”)是transform处理过之后的字段</strong>, 而不是数据库中的字段名</p>
+<h2 id="动态Predicate-与具体对象有关"><a href="#动态Predicate-与具体对象有关" class="headerlink" title="动态Predicate(与具体对象有关)"></a>动态Predicate(与具体对象有关)</h2><blockquote>
+<p> 待续</p>
+</blockquote>
+<p>计划列表:</p>
+<ul>
+<li>Predicate 202</li>
+<li>Transform 203</li>
+<li>Renderer 204</li>
+<li>Placement 205</li>
+<li>Jump 206</li>
+<li>坐标轴 207</li>
+<li></li>
+</ul>
+
       
 
       
@@ -168,6 +197,25 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Kyrix</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Visualization</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">d3</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -369,18 +417,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">weChat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">wxApp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">YumiMusic</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Kyrix</a>
               </li>
              
@@ -394,6 +430,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Visualization</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">d3</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -414,6 +454,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">weChat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">wxApp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">YumiMusic</a>
               </li>
              
               <li class="article-tag-list-item">
