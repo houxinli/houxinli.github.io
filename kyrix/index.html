@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="kyrix.js"></script>
+  <script src="assets/metros.js"></script>
+  <script src="assets/zipcodes.js"></script>
+  <script src="assets/states.js"></script>
+
+  <meta charset="UTF-8">
+  <title>Agero-Kyrix</title>
+  <style type="text/css">
+    body {
+      overflow: hidden;
+    }
+    #bigdiv {
+      width: 100%
+    }
+    #containerSvg {
+      margin: auto;
+      display: block
+    }
+    .agero-dropdown {
+      position: fixed;
+      display: block;
+    }
+    #div-equipment{
+      z-index: 10;
+    }
+    .dropdown-submenu.show {
+      position: absolute;
+    }
+    .dropdown-submenu {
+      position: relative;
+    }
+    .dropdown-submenu > .dropdown-menu {
+      top: 0;
+      left: 100%;
+      margin-top: -6px;
+      margin-left: -1px;
+      -webkit-border-radius: 0 6px 6px 6px;
+      -moz-border-radius: 0 6px 6px;
+      border-radius: 0 6px 6px 6px;
+    }
+    .dropdown-submenu.menu-selected > .dropdown-menu {
+      display: block;
+    }
+    .dropdown-submenu > a:after {
+      display: block;
+      content: " ";
+      float: right;
+      width: 0;
+      height: 0;
+      border-color: transparent;
+      border-style: solid;
+      border-width: 5px 0 5px 5px;
+      border-left-color: #ccc;
+      margin-top: 5px;
+      margin-right: -10px;
+    }
+    .dropdown-submenu.menu-selected > a:after {
+    /*.dropdown-submenu:hover > a:after {*/
+      /*border-left-color: #fff;*/
+    }
+
+    #slider{
+      width: 60%;
+      margin: auto;
+      align-content: center;
+    }
+
+  </style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/iThing-min.css" type="text/css" />
+</head>
+<body>
+
+<div id="bigdiv">
+  <div class="agero-dropdown" id="div-equipment">
+    <div class="btn-group dropright">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        All
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <a class="dropdown-item equipment" id="All" href="#">All</a>
+        <div class="dropdown-submenu">
+          <a class="dropdown-item" tabindex="-1" href="javascript:;">LOCK</a>
+          <div class="dropdown-menu dropdown">
+            <a class="dropdown-item equipment LOCK" href="#" id="LOCK">All</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item equipment LOCK" href="#" id="LO">LO</a>
+            <a class="dropdown-item equipment LOCK" href="#" id="XXX">XXX</a>
+          </div>
+        </div>
+        <div class="dropdown-submenu">
+          <a class="dropdown-item" tabindex="-1" id="submenu-TOW" data-toggle="dropdown" href="javascript:;">TOW</a>
+          <div class="dropdown-menu dropdown">
+            <a class="dropdown-item equipment TOW" href="#" id="TOW">All</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item equipment TOW" href="#" id="AAR" >AAR</a>
+            <a class="dropdown-item equipment TOW" href="#" id="DW" >DW</a>
+            <a class="dropdown-item equipment TOW" href="#" id="EVMC" >EVMC</a>
+            <a class="dropdown-item equipment TOW" href="#" id="HDLB" >HDLB</a>
+            <a class="dropdown-item equipment TOW" href="#" id="HDUR" >HDUR</a>
+            <a class="dropdown-item equipment TOW" href="#" id="HDW" >HDW</a>
+            <a class="dropdown-item equipment TOW" href="#" id="LCT" >LCT</a>
+            <a class="dropdown-item equipment TOW" href="#" id="LDF" >LDF</a>
+            <a class="dropdown-item equipment TOW" href="#" id="LDWL" >LDWL</a>
+            <a class="dropdown-item equipment TOW" href="#" id="MDF" >MDF</a>
+            <a class="dropdown-item equipment TOW" href="#" id="MDUR" >MDUR</a>
+            <a class="dropdown-item equipment TOW" href="#" id="MDW" >MDW</a>
+            <a class="dropdown-item equipment TOW" href="#" id="MP" >MP</a>
+            <a class="dropdown-item equipment TOW" href="#" id="PAR" >PAR</a>
+            <a class="dropdown-item equipment TOW" href="#" id="SHD" >SHD</a>
+            <a class="dropdown-item equipment TOW" href="#" id="WHD" >WHD</a>
+            <a class="dropdown-item equipment TOW" href="#" id="WLD" >WLD</a>
+            <a class="dropdown-item equipment TOW" href="#" id="WMD" >WMD</a>
+          </div>
+        </div>
+        <div class="dropdown-submenu">
+          <a class="dropdown-item" tabindex="-1" href="javascript:;">ROAD</a>
+          <div class="dropdown-menu dropdown" >
+            <a class="dropdown-item equipment ROAD" href="#" id="ROAD">All</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item equipment ROAD" href="#" id="DRV" >DRV</a>
+            <a class="dropdown-item equipment ROAD" href="#" id="HDRS" >HDRS</a>
+            <a class="dropdown-item equipment ROAD" href="#" id="HDTS" >HDTS</a>
+            <a class="dropdown-item equipment ROAD" href="#" id="I5" >I5</a>
+            <a class="dropdown-item equipment ROAD" href="#" id="LRS" >LRS</a>
+            <a class="dropdown-item equipment ROAD" href="#" id="MDRS" >MDRS</a>
+            <a class="dropdown-item equipment ROAD" href="#" id="MDTS" >MDTS</a>
+            <a class="dropdown-item equipment ROAD" href="#" id="MRS" >MRS</a>
+            <a class="dropdown-item equipment ROAD" href="#" id="MS" >MS</a>
+            <a class="dropdown-item equipment ROAD" href="#" id="TP" >TP</a>
+            <a class="dropdown-item equipment ROAD" href="#" id="TS" >TS</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="agero-dropdown" id="div-rate">
+    <div class="btn-group dropright">
+      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false">
+        pa_eligible_rate
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item rate" href="#" id="oon_rate">oon_rate</a>
+        <a class="dropdown-item rate" href="#" id="pa_call_acceptance_rate">pa_call_acceptance_rate</a>
+        <a class="dropdown-item rate" href="#" id="pa_not_assigned_rate">pa_not_assigned_rate</a>
+        <a class="dropdown-item rate" href="#" id="pa_eligible_rate">pa_eligible_rate</a>
+        <a class="dropdown-item rate" href="#" id="pa_client_exclusion_rate">pa_client_exclusion_rate</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<script src="assets/jquery.mousewheel.min.js"></script>
+<script src="assets/jQDateRangeSlider-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+  $('.dropdown-submenu').on("click.agero", function(e){
+    e.stopPropagation();
+    $(this).toggleClass("menu-selected");
+    $(this).siblings().removeClass("menu-selected");
+  });
+  $('a.equipment').on("click.agero", function(e){
+    $(this).closest(".dropright").click();
+    $("#dropdownMenu1").text(this.id);
+    // this is where the update funtion for equipment should be invoked
+    reRenderKyrix();
+    // var pred = {
+    //   layer1: {"==" : ["name", "TX Tertiary"] }
+    // }
+    // kyrix.triggerPredicate("usmap", pred);
+  });
+  $('a.rate').on("click.agero", function(e){
+    $("#dropdownMenu2").text(this.id);
+    // this is where the update funtion for rate should be invoked
+    reRenderKyrix();
+  });
+
+    positionButtons = function() {
+      var bbox = d3
+        .select("#containerSvg")
+        .node()
+        .getBoundingClientRect();
+      var bLeft = +bbox.left;
+      var bTop = +bbox.top;
+
+      // position the buttons
+      var leftMargin = 100;
+      var topMargin = 20;
+      var dist = 45;
+      d3.select("#div-equipment")
+        .style("top", bTop + topMargin + "px")
+        .style("left", 30 + "px")
+        // .style("right", bLeft - leftMargin + 1160 + "px");
+      d3.select("#div-rate")
+        .style("top", bTop + topMargin + dist + "px")
+        .style("left", 30 + "px")
+        // .style("right", bLeft - leftMargin + 1160 + "px");
+    }
+  d3.select(window).on("resize.dropdown", positionButtons);
+
+    embedKyrix();
+
+  function embedKyrix() {
+    // TODO: change the address where the kyrix backend is running, has to start with http://
+    // var serverAddr = "http://35.237.60.55:8000";
+    var serverAddr = "http://35.224.53.141:8000/";
+
+    // initializeApp() loads kyrix vis into a div, and returns this div
+    document.getElementById("bigdiv").appendChild(kyrix.initializeApp(serverAddr).node());
+
+    var equipmenToType = {"AAR": "TOW", "DRV": "ROAD", "DW": "TOW", "EVMC": "TOW", "HDLB": "TOW", "HDRS": "ROAD", "HDTS": "ROAD", "HDUR": "TOW", "HDW": "TOW", "I5": "ROAD", "LCT": "TOW", "LDF": "TOW", "LDWL": "TOW", "LO": "LOCK", "LRS": "ROAD", "MDF": "TOW", "MDRS": "ROAD", "MDTS": "ROAD", "MDUR": "TOW", "MDW": "TOW", "MP": "TOW", "MRS": "ROAD", "MS": "ROAD", "PAR": "TOW", "SHD": "TOW", "TP": "ROAD", "TS": "ROAD", "WHD": "TOW", "WLD": "TOW", "WMD": "TOW", "XXX": "LOCK"};
+    var equipments = Object.keys(equipmenToType);
+    equipmentsOfType = {"TOW": [], "ROAD": [], "LOCK": []};
+    for (var i = 0; i < equipments.length; i ++)
+      equipmentsOfType[equipmenToType[equipments[i]]].push(equipments[i]);
+
+    kyrix.addRenderingParameters(metros);
+    kyrix.addRenderingParameters(zipcodes);
+    kyrix.addRenderingParameters(states);
+  }
+
+  function reRenderKyrix() {
+
+    var curEquipment = $("#dropdownMenu1").text().replace(/\s/g,'');
+    var curEquipmentList = [];
+    if (curEquipment == "All")
+      curEquipmentList = equipmentsOfType["TOW"].concat(equipmentsOfType["ROAD"], equipmentsOfType["LOCK"]);
+    else if (curEquipment != "LOCK" && curEquipment != "TOW" && curEquipment != "ROAD")
+      curEquipmentList.push(curEquipment);
+    else
+      curEquipmentList = equipmentsOfType[curEquipment];
+    if (curEquipmentList)
+      kyrix.addRenderingParameters({equipments: curEquipmentList});
+
+    var curRate = $("#dropdownMenu2").text().replace(/\s/g,'');
+    if (curRate == "Rate")
+      curRate = null;
+    if (curRate)
+      kyrix.addRenderingParameters({rate: curRate});
+    if (kyrix.getCurrentCanvasId("usmap") == "metromap")
+      kyrix.reRender("usmap", 1, {reRender: true});
+    else
+      kyrix.reRender("usmap", 1, {reRender: true});
+  }
+
+})
+
+</script>
+
+<div id="slider"></div>
+
+<script type="text/javascript">
+  // $("#slider").dateRangeSlider();
+  $("#slider").dateRangeSlider({
+    bounds:{
+      min: new Date(2019, 3, 1),
+      max: new Date(2019, 6, 16)  
+    },
+      defaultValues:{
+      min: new Date(2019, 3, 1),
+      max: new Date(2019, 4, 1)
+    },
+    wheelMode: "zoom",
+    step:{
+      days: 1
+    }
+  });
+  $("#slider").bind("userValuesChanged", handleSlider)
+
+  function handleSlider(event, data) {
+    var min = dateformat(data.values.min);
+    var max = dateformat(data.values.max);
+    console.log("Values just changed. min: " + min + " max: " + max);
+    var pred = {
+      layer1: {
+        OR : [
+          { "==": ["date", min] },
+          { "==": ["date", max] }
+        ]
+      }
+    }
+    kyrix.triggerPredicate("usmap", pred);
+  }
+
+  function dateformat(date){
+    var day = date.getDate();
+    if (day < 10) day = '0' + day;
+    var month = date.getMonth() + 1;
+    if (month < 10) month = '0' + month;
+    var year = date.getFullYear();
+
+    return  year + '-' + month + '-' + day ;
+  }
+
+</script>
+</body>
+</html>
