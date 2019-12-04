@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://houxinli.github.io">
-  <title>Kyrix103 | Xinli&#39;s Blog</title>
+  <title>Kyrix202 | Xinli&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Kyrix踩坑之路3上一次成功地在我的PC上把Kyrix跑起来了, 不过我对Docker和Kyrix还是知之甚少, 慢慢记录一些在学习过程当中遇到的坑和捡到的贝壳吧 [更新: 最近发现, 上一次我还是没有成功在我的pc上把Kyrix跑起来! 上一次在0.0.0.0:8000成功运行的.不过在我坚持不断的各种踩坑之下, 成功将我想要做的数据导入到了远端Docker的PostgreSQL数据库当中,">
-<meta name="keywords" content="Kyrix,Docker,PostgreSQL">
+  <meta name="description" content="Kyrix 求生之路2: PredicatePredicate, 中文可以翻译为谓语, 但是在Kyrix的语境中, 我认为一个更贴切的翻译应该是 “条件”. 在Kyrix中, predicate的主要作用是限制返回的结果, 类似于一个“filter”, 满足条件的结果将会被返回. 在API Reference中, 对predicate的解释比较不充分">
+<meta name="keywords" content="Kyrix,Visualization,d3">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kyrix103">
-<meta property="og:url" content="http://houxinli.github.io/2019/06/05/Kyrix103/index.html">
+<meta property="og:title" content="Kyrix202">
+<meta property="og:url" content="http://houxinli.github.io/2019/06/24/Kyrix202/index.html">
 <meta property="og:site_name" content="Xinli&#39;s Blog">
-<meta property="og:description" content="Kyrix踩坑之路3上一次成功地在我的PC上把Kyrix跑起来了, 不过我对Docker和Kyrix还是知之甚少, 慢慢记录一些在学习过程当中遇到的坑和捡到的贝壳吧 [更新: 最近发现, 上一次我还是没有成功在我的pc上把Kyrix跑起来! 上一次在0.0.0.0:8000成功运行的.不过在我坚持不断的各种踩坑之下, 成功将我想要做的数据导入到了远端Docker的PostgreSQL数据库当中,">
+<meta property="og:description" content="Kyrix 求生之路2: PredicatePredicate, 中文可以翻译为谓语, 但是在Kyrix的语境中, 我认为一个更贴切的翻译应该是 “条件”. 在Kyrix中, predicate的主要作用是限制返回的结果, 类似于一个“filter”, 满足条件的结果将会被返回. 在API Reference中, 对predicate的解释比较不充分">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-07T08:33:23.102Z">
+<meta property="og:updated_time" content="2019-06-25T10:21:05.358Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kyrix103">
-<meta name="twitter:description" content="Kyrix踩坑之路3上一次成功地在我的PC上把Kyrix跑起来了, 不过我对Docker和Kyrix还是知之甚少, 慢慢记录一些在学习过程当中遇到的坑和捡到的贝壳吧 [更新: 最近发现, 上一次我还是没有成功在我的pc上把Kyrix跑起来! 上一次在0.0.0.0:8000成功运行的.不过在我坚持不断的各种踩坑之下, 成功将我想要做的数据导入到了远端Docker的PostgreSQL数据库当中,">
+<meta name="twitter:title" content="Kyrix202">
+<meta name="twitter:description" content="Kyrix 求生之路2: PredicatePredicate, 中文可以翻译为谓语, 但是在Kyrix的语境中, 我认为一个更贴切的翻译应该是 “条件”. 在Kyrix中, predicate的主要作用是限制返回的结果, 类似于一个“filter”, 满足条件的结果将会被返回. 在API Reference中, 对predicate的解释比较不充分">
   
     <link rel="alternative" href="/atom.xml" title="Xinli&#39;s Blog" type="application/atom+xml">
   
@@ -141,80 +141,54 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Kyrix103" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Kyrix202" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Kyrix103
+      Kyrix202
     </h1>
   
 
         
-        <a href="/2019/06/05/Kyrix103/" class="archive-article-date">
-  	<time datetime="2019-06-05T13:38:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-05</time>
+        <a href="/2019/06/24/Kyrix202/" class="archive-article-date">
+  	<time datetime="2019-06-24T15:14:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Kyrix踩坑之路3"><a href="#Kyrix踩坑之路3" class="headerlink" title="Kyrix踩坑之路3"></a>Kyrix踩坑之路3</h1><p>上一次成功地在我的PC上把Kyrix跑起来了, 不过我对Docker和Kyrix还是知之甚少, 慢慢记录一些在学习过程当中遇到的坑和捡到的贝壳吧</p>
-<p>[更新: 最近发现, 上一次我还是没有成功在我的pc上把Kyrix跑起来! 上一次在0.0.0.0:8000成功运行的.不过在我坚持不断的各种踩坑之下, 成功将我想要做的数据导入到了远端Docker的PostgreSQL数据库当中, 这篇主要写一下准备远端开发环境时遇到的各种坑吧]</p>
+        <h1 id="Kyrix-求生之路2-Predicate"><a href="#Kyrix-求生之路2-Predicate" class="headerlink" title="Kyrix 求生之路2: Predicate"></a>Kyrix 求生之路2: Predicate</h1><p>Predicate, 中文可以翻译为谓语, 但是在Kyrix的语境中, 我认为一个更贴切的翻译应该是 “条件”. 在Kyrix中, predicate的主要作用是限制返回的结果, 类似于一个“filter”, 满足条件的结果将会被返回. 在API Reference中, 对predicate的解释比较不充分</p>
 <a id="more"></a>
-<p>[TOC]</p>
-<h2 id="成功修改前端renderer"><a href="#成功修改前端renderer" class="headerlink" title="成功修改前端renderer"></a>成功修改前端renderer</h2><h3 id="直接在运行中的docker容器里修改文件"><a href="#直接在运行中的docker容器里修改文件" class="headerlink" title="直接在运行中的docker容器里修改文件"></a>直接在运行中的docker容器里修改文件</h3><p>在远端运行起来docker的服务器上, 通过直接使用<code>docker exec -it kyrix_kyrix_1 /bin/sh</code>命令进入docker的shell, 然后使用vim修改文件, 然后进入/kyrix/compiler/example/nba, 直接运行node nba.js 就可重新生成 Kyrix App, 此时查看修改, 就已经应用成功</p>
-<h3 id="通过SFTP-docker-cp的方式尽可能简单地修改Kyrix文件"><a href="#通过SFTP-docker-cp的方式尽可能简单地修改Kyrix文件" class="headerlink" title="通过SFTP + docker cp的方式尽可能简单地修改Kyrix文件"></a>通过SFTP + docker cp的方式尽可能简单地修改Kyrix文件</h3><p><a href="https://blog.csdn.net/md1688/article/details/80957952" target="_blank" rel="noopener">https://blog.csdn.net/md1688/article/details/80957952</a> 根据这篇博文的内容下载 SFTP插件并且配置好 map to remote (将原来的Kyrix文件夹删掉, 放弃使用 Git进行同步, 转而使用SFTP)</p>
-<p>这样子本地保存了文件之后, Sublime会自动将改变同步到之后在远程宿主机上的文件.</p>
-<p>根据这篇回答 <a href="https://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container" target="_blank" rel="noopener">https://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container</a></p>
-<p>写了一个简单的批处理命令</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash</span></span><br><span class="line"></span><br><span class="line">docker cp compiler/examples/. bcd:/kyrix/compiler/examples/.</span><br></pre></td></tr></table></figure>
-<p>之后chmod 777 ./x.sh, 运行</p>
-<p>这里还出了点小问题</p>
-<p>根据这篇博客 <a href="https://blog.csdn.net/hxpjava1/article/details/79711710" target="_blank" rel="noopener">https://blog.csdn.net/hxpjava1/article/details/79711710</a></p>
-<p>使用dos2unix解决格式问题</p>
-<p>之后只需要在保存之后运行 x.sh 即可保存文件到docker容器当中.</p>
-<p>虽然在 Development 文档中提到前端改变不需要重启, 但是renderer相关的似乎还是需要重启应用才行.在docker容器的shell中cd到需要重启应用的目录, 运行 <code>node nba.js</code> 即可重启应用, 此时刷新浏览器便可更新样式</p>
-<h2 id="PostgreSQL-数据库"><a href="#PostgreSQL-数据库" class="headerlink" title="PostgreSQL 数据库"></a>PostgreSQL 数据库</h2><p>由于以前没有接触过PostgreSQL数据库, 所以这里还是踩了不少坑, 花了很多个小时, 最后还是正常连上了, 从头开始记录一下我的PostgreSQL踩坑之路吧</p>
-<h3 id="在本地安装PostgreSQL和PgAdmin"><a href="#在本地安装PostgreSQL和PgAdmin" class="headerlink" title="在本地安装PostgreSQL和PgAdmin"></a>在本地安装PostgreSQL和PgAdmin</h3><p>根据这篇博客 <a href="https://www.cnblogs.com/sharpest/p/6225028.html" target="_blank" rel="noopener">https://www.cnblogs.com/sharpest/p/6225028.html</a> 在这篇文章中提到的 <a href="http://www.enterprisedb.com/products-services-training/pgdownload" target="_blank" rel="noopener">http://www.enterprisedb.com/products-services-training/pgdownload</a> 地址下载的postgreSQL安装器在安装完成之后会自动打开 stack installer, 帮助安装postGIS等.</p>
-<h3 id="踩坑远端的Docker-PostgreSQL"><a href="#踩坑远端的Docker-PostgreSQL" class="headerlink" title="踩坑远端的Docker PostgreSQL"></a>踩坑远端的Docker PostgreSQL</h3><p>首先, 进入Docker的shell <code>docker exec -it kyrix_db_1 /bin/bash</code></p>
-<p>然而 kartoza/postgis:11.0-2.5 里面vim是不能直接使用的, 这简直要了亲命了, 为了使得直接使用命令行能访问地方便, 需要修改pg_hba.conf等文件, 但是没有vim就很难受, 所以首先需要做的是 <code>apt install vim</code></p>
-<p>由于通过Docker命令在默认参数时进入postgres的用户会和你ssh登录的服务器用户一致, 也就是说一般是root, 然而postgres默认的用户是postgres, 而没有 root 这个用户, 所以想要进入psql界面, 直接使用psql是不行的, 而且psql如果不带参数, 默认后面会接上本机的用户名, 也就是说会报错说root不是一个数据库. 一个比较trick的方法是 <code>su - postgres</code> 使用这个指令之后会切换用户到postgres, 此时直接使用psql会进入psql命令行, 显示的是<code>postgres=#</code>在这个状态下, 实际上发生的是 <strong>以postgres用户管理postgres数据库</strong>, 此时便有一些基本的postgres命令可用了. 这些命令都以<code>\</code>开头:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\l #显示所有数据库</span><br><span class="line">\du #显示所有用户</span><br><span class="line">\c #切换数据库和用户, 若无参数会显示当前用户和数据库, 使用方式举例: \c database user</span><br><span class="line">\h 获得postgres帮助</span><br><span class="line">\q 退出psql命令行</span><br></pre></td></tr></table></figure>
-<h3 id="在PostgreSQL中进行用户管理"><a href="#在PostgreSQL中进行用户管理" class="headerlink" title="在PostgreSQL中进行用户管理"></a>在PostgreSQL中进行用户管理</h3><p>在运行着PostgreSQL的主机/虚拟机/Docker上使用命令行进行各种操作时, 都有两种方式可以选择:</p>
-<ol>
-<li>在shell里, psql命令行外直接操作</li>
-<li>在psql里使用psql指令操作</li>
-</ol>
-<p>在这里我主要记录一下第二种方式, psql命令正则化比较强, 命令可以互相搭配, 我尝试用我使用到的例子来记录一下常见的操作</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 大部分指令好像大小写无关, 但我也没有具体完全测试过</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> mydb <span class="comment">--创建数据库</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> lalala <span class="keyword">WITH</span> <span class="keyword">password</span> <span class="string">'fafafa'</span> <span class="comment">--创建用户</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> lalala <span class="keyword">WITH</span> SUPERUSER <span class="comment">--赋予超级用户权限</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> lalaladb OWNER lalala <span class="comment">--以某用户身份创建数据库</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">ON</span> <span class="keyword">DATABASE</span> mydb <span class="keyword">TO</span> lalala <span class="comment">--给予所有权限</span></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> <span class="keyword">DATABASE</span> mydb <span class="keyword">TO</span> lalala <span class="comment">--暂时还没搞清楚这一条和上一条的区别</span></span><br></pre></td></tr></table></figure>
-<p>在创建完自己的用户之后, 如果尝试使用\c指令切换用户的话, 可能会遇到 Peer authentication failure的问题, 请参考</p>
-<p><a href="https://stackoverflow.com/questions/18664074/getting-error-peer-authentication-failed-for-user-postgres-when-trying-to-ge" target="_blank" rel="noopener">https://stackoverflow.com/questions/18664074/getting-error-peer-authentication-failed-for-user-postgres-when-trying-to-ge</a></p>
-<p><a href="https://blog.csdn.net/wangyezi19930928/article/details/20358369" target="_blank" rel="noopener">https://blog.csdn.net/wangyezi19930928/article/details/20358369</a></p>
-<h4 id="关于用户权限管理"><a href="#关于用户权限管理" class="headerlink" title="关于用户权限管理"></a>关于用户权限管理</h4><p><a href="https://www.cnblogs.com/zhangeamon/p/8990232.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhangeamon/p/8990232.html</a> PostgreSQL 用户和权限管理</p>
-<p><a href="https://blog.csdn.net/pg_hgdb/article/details/79755116" target="_blank" rel="noopener">https://blog.csdn.net/pg_hgdb/article/details/79755116</a> psql 参数或\c命令 切换用户</p>
-<h3 id="PgAdmin远程登录Docker中的PostgreSQL"><a href="#PgAdmin远程登录Docker中的PostgreSQL" class="headerlink" title="PgAdmin远程登录Docker中的PostgreSQL"></a>PgAdmin远程登录Docker中的PostgreSQL</h3><p><a href="https://blog.csdn.net/oliveryp/article/details/82494541" target="_blank" rel="noopener">https://blog.csdn.net/oliveryp/article/details/82494541</a></p>
-<p>按照这篇文章的叙述进行配置即可</p>
-<h3 id="表格的创建和CSV文件的导入"><a href="#表格的创建和CSV文件的导入" class="headerlink" title="表格的创建和CSV文件的导入"></a>表格的创建和CSV文件的导入</h3><p>首先, 表格的创建, 使用sql文件举例</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--从格式上来说, 最后必须有主键约束才能正常执行创建新表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> persons</span><br><span class="line">(</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">serial</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  first_name <span class="built_in">character</span> <span class="built_in">varying</span>(<span class="number">50</span>),</span><br><span class="line">  last_name <span class="built_in">character</span> <span class="built_in">varying</span>(<span class="number">50</span>),</span><br><span class="line">  dob <span class="built_in">date</span>,</span><br><span class="line">  email <span class="built_in">character</span> <span class="built_in">varying</span>(<span class="number">255</span>),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> persons_pkey PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>另外, 由于我的数据格式为csv, 其中有一个比赛日期的格式为</p>
-<p>22/08/2018 的 DMY 格式, 所以需要设置 datestyle 参数, 否则会报错提示日期越界. 设置datestyle的命令为 <code>SET datestyle TO &quot;ISO, DMY&quot;;</code> 注意要把ISO和DMY都写上否则会报错 </p>
-<p>同时要注意的是, 列名里不能出现一些特殊符号和保留字, 比如<code>AS . &lt; &gt;</code>等.</p>
-<p>至于复制CSV文件到数据库, 我参考了这篇博客: <a href="https://www.cnblogs.com/amberdata/p/7241102.html" target="_blank" rel="noopener">https://www.cnblogs.com/amberdata/p/7241102.html</a></p>
-<p>当然教程这篇写的更详细: &lt;<a href="http://www.postgresqltutorial.com/import-csv-file-into-posgresql-table/" target="_blank" rel="noopener">http://www.postgresqltutorial.com/import-csv-file-into-posgresql-table/</a>&gt;</p>
-<p>当然, 也可以直接使用PgAdmin来执行csv文件的导入, 可以参考 <a href="https://www.cnblogs.com/panpanwelcome/p/8675531.html" target="_blank" rel="noopener">https://www.cnblogs.com/panpanwelcome/p/8675531.html</a></p>
-<p>最后我写了一个简单的sh来执行我指定的sql文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">! /bin/bash</span></span><br><span class="line"></span><br><span class="line">SQLFile=/data/ct_1819.sql</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> -d代表数据库 -u代表用户 -f代表要执行的sql文件位置</span></span><br><span class="line">psql -d epl -U xinli -f "$SQLFile"</span><br></pre></td></tr></table></figure>
-<p>我的SQL文件 (参考)</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> datestyle <span class="keyword">TO</span> <span class="string">"ISO, DMY"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> public.epl1819(</span><br><span class="line">	<span class="keyword">ID</span> <span class="built_in">int</span>,</span><br><span class="line">	<span class="keyword">Div</span>	<span class="built_in">char</span>(<span class="number">2</span>),</span><br><span class="line">	GameDate	<span class="built_in">date</span>,</span><br><span class="line">	HomeTeam	<span class="built_in">varchar</span>(<span class="number">20</span>),</span><br><span class="line">	AwayTeam	<span class="built_in">varchar</span>(<span class="number">20</span>),</span><br><span class="line">	FTHG	<span class="built_in">int</span>,</span><br><span class="line">	FTAG	<span class="built_in">int</span>,</span><br><span class="line">	FTR		<span class="built_in">char</span>(<span class="number">1</span>),</span><br><span class="line"><span class="comment">--  ...</span></span><br><span class="line">	B365H	<span class="built_in">real</span>,</span><br><span class="line">	B365D	<span class="built_in">real</span>,</span><br><span class="line">	B365A	<span class="built_in">real</span>,</span><br><span class="line"> 	<span class="keyword">CONSTRAINT</span> epl1819_pkey PRIMARY <span class="keyword">KEY</span> (<span class="keyword">ID</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">COPY public.epl1819 FROM '/data/1819.csv' <span class="keyword">with</span> csv header;</span><br></pre></td></tr></table></figure>
-<hr>
-
-<p>其他参考:</p>
-<p>阮一峰的教程 <a href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html</a></p>
-<p>PostgreSQL 11.2 手册 <a href="http://www.postgres.cn/docs/11/" target="_blank" rel="noopener">http://www.postgres.cn/docs/11/</a></p>
-<p>易百教程 PostgreSQL <a href="https://www.yiibai.com/postgresql" target="_blank" rel="noopener">https://www.yiibai.com/postgresql</a></p>
+<h2 id="简单静态-Predicate"><a href="#简单静态-Predicate" class="headerlink" title="简单静态 Predicate"></a>简单静态 Predicate</h2><p>以下是API中这段叙述</p>
+<blockquote>
+<p><em>project.<strong>setInitialStates</strong>(view, initial_canvas, initial_viewport_x, initial_viewport_y, initial_predicates)</em><a href="https://github.com/tracyhenry/Kyrix/blob/master/compiler/src/index.js#L148" target="_blank" rel="noopener">&lt;&gt;</a></p>
+<p>Sets the initial states of a view, including an initial canvas (<code>initial_canvas</code>) to show in the view when the app is first loaded, the canvas coordinates (<code>initial_viewport_x</code> and <code>initial_viewport_y</code>) of the top left-hand corner of the view, and a predicate object (<code>initial_predicates</code>) used to filter the <a href="https://github.com/tracyhenry/Kyrix/wiki/API-Reference#transform" target="_blank" rel="noopener">transform</a> of the <a href="https://github.com/tracyhenry/Kyrix/wiki/API-Reference#layer" target="_blank" rel="noopener">layers</a> on the initial canvas. This predicate (optional) should be specified as a JS object mapping layers to binary AND/OR/EQ expression trees. Consider the following example.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; p.setInitialStates(leftView, employeeCanvas, <span class="number">300</span>, <span class="number">400</span>, &#123;<span class="string">"layer0"</span> : &#123;<span class="string">"=="</span> : [<span class="string">"age"</span>, <span class="number">30</span>]&#125;&#125;);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>其中对predicate写法的描述是</p>
+<blockquote>
+<p>a JS object mapping layers to binary AND/OR/EQ expression trees.</p>
+<p><code>{&quot;layer0&quot; : {&quot;==&quot; : [&quot;age&quot;, 30]}}</code></p>
+</blockquote>
+<p>这个看上去有点没头没脑的, 第一次拿到的时候比较难懂, 下面我根据我的实验说一下我的理解.</p>
+<p>首先, 一个predicate是一个JS的Object, 一个predicate与一个canvas相关联, 也就是说, 在调用<code>project.setInitialStates</code>这个函数时, 整个predicate会被拿来约束employeeCanvas的内容. 在predicate内部, 由于每一层(Layer)都和一个不同的transform绑定, 所以每一层的约束就是一个小的对象, 而由于层是没有通过字符串名字的, 所以只是<strong>通过<code>canvas.addLayer</code>被调用的顺序来决定是layer0, layer1…</strong>至于predicate的内部约束方法, 还是比较直观, 依葫芦画瓢就行, 不过有一点要注意的是, <strong>predicate当中的字段(field, 如这里的”age”)是transform处理过之后的字段</strong>, 而不是数据库中的字段名</p>
+<h2 id="动态Predicate-与具体对象有关"><a href="#动态Predicate-与具体对象有关" class="headerlink" title="动态Predicate(与具体对象有关)"></a>动态Predicate(与具体对象有关)</h2><blockquote>
+<p> 待续</p>
+</blockquote>
+<p>计划列表:</p>
+<ul>
+<li>Predicate 202</li>
+<li>Transform 203</li>
+<li>Renderer 204</li>
+<li>Placement 205</li>
+<li>Jump 206</li>
+<li>坐标轴 207</li>
+<li></li>
+</ul>
 
       
 
@@ -232,11 +206,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Visualization</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">PostgreSQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">d3</a>
         		</li>
       		
 		</ul>
@@ -292,7 +266,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://houxinli.github.io/2019/06/05/Kyrix103/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://houxinli.github.io/2019/06/24/Kyrix202/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -306,18 +280,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/06/07/hexo103/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          hexo103
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/05/29/wxApp103/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">wxApp103</div>
+    <a href="/2019/06/18/kyrix201/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">kyrix201</div>
       <i class="icon-circle-right"></i>
     </a>
   
