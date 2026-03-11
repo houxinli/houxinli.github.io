@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EB 排期追踪（中国大陆）</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; background: #f6f8fb; color: #1a1f36; }
+    .container { max-width: 980px; margin: 0 auto; padding: 24px 16px 40px; }
+    .card { background: #fff; border-radius: 14px; box-shadow: 0 8px 24px rgba(22, 29, 37, 0.08); padding: 18px; }
+    h1 { margin: 0 0 10px; font-size: 26px; }
+    p { line-height: 1.5; }
+    .controls { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0 18px; }
+    label { font-weight: 600; font-size: 14px; }
+    select { margin-left: 6px; padding: 6px 8px; border: 1px solid #d0d7e2; border-radius: 8px; }
+    #chart { width: 100%; height: 380px; background: linear-gradient(180deg, #fff, #fbfdff); border: 1px solid #ebeff6; border-radius: 12px; }
+    .meta { color: #586173; font-size: 14px; margin-top: 12px; }
+    .legend { display: flex; gap: 14px; font-size: 13px; color: #445; margin: 8px 0; }
+    .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; }
+    .normal { background: #2f80ed; }
+    .current { background: #16a34a; }
+    .unavail { background: #e11d48; }
+    a { color: #2f80ed; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>中国大陆出生 EB 申请人排期追踪（MVP）</h1>
+    <p>先做一个纯静态版本：从 JSON 数据读取并绘制趋势图，方便后续每月更新。</p>
+
+    <div class="card">
+      <div class="controls">
+        <label>类别
+          <select id="category">
+            <option>EB2</option>
+            <option>EB3</option>
+          </select>
+        </label>
+        <label>图表类型
+          <select id="chartType">
+            <option>FAD</option>
+            <option>DOF</option>
+          </select>
+        </label>
+      </div>
+
+      <svg id="chart" viewBox="0 0 920 380" preserveAspectRatio="none"></svg>
+      <div class="legend">
+        <span><i class="dot normal"></i>普通排期</span>
+        <span><i class="dot current"></i>Current (C)</span>
+        <span><i class="dot unavail"></i>Unavailable (U)</span>
+      </div>
+      <div id="meta" class="meta"></div>
+      <div class="meta">数据文件：<code>/data/visa_bulletin_cn_eb.json</code>（当前为示例数据）</div>
+      <div class="meta"><a href="/">返回首页</a></div>
+    </div>
+  </div>
+
+  <script>
+    const categoryEl = document.getElementById('category');
+    const chartTypeEl = document.getElementById('chartType');
+    const chartEl = document.getElementById('chart');
+    const metaEl = document.getElementById('meta');
+    let source = null;
+
+    function parseCutoff(v, month) {
+      if (v === 'C') return { type: 'C', date: new Date(month).getTime() };
+      if (v === 'U') return { type: 'U', date: null };
+      return { type: 'DATE', date: new Date(v).getTime() };
+    }
+
+    function render() {
+      const records = source.records
+        .filter(r => r.category === categoryEl.value && r.chart_type === chartTypeEl.value)
+        .sort((a, b) => new Date(a.bulletin_month) - new Date(b.bulletin_month));
+
+      if (!records.length) {
+        chartEl.innerHTML = '<text x="20" y="30">暂无数据</text>';
+        return;
+      }
+
+      const parsed = records.map(r => ({
+        ...r,
+        monthMs: new Date(r.bulletin_month).getTime(),
+        parsed: parseCutoff(r.cutoff, r.bulletin_month)
+      }));
+
+      const w = 920, h = 380, left = 70, right = 20, top = 20, bottom = 55;
+      const plotW = w - left - right, plotH = h - top - bottom;
+
+      const xMin = parsed[0].monthMs;
+      const xMax = parsed[parsed.length - 1].monthMs;
+      const datePoints = parsed.filter(p => p.parsed.date !== null).map(p => p.parsed.date);
+      const yMin = Math.min(...datePoints);
+      const yMax = Math.max(...datePoints);
+
+      const x = t => left + ((t - xMin) / Math.max(1, (xMax - xMin))) * plotW;
+      const y = t => top + (1 - ((t - yMin) / Math.max(1, (yMax - yMin)))) * plotH;
+
+      let svg = '';
+      svg += `<rect x="0" y="0" width="${w}" height="${h}" fill="transparent" />`;
+      svg += `<line x1="${left}" y1="${h-bottom}" x2="${w-right}" y2="${h-bottom}" stroke="#97a3b6" />`;
+      svg += `<line x1="${left}" y1="${top}" x2="${left}" y2="${h-bottom}" stroke="#97a3b6" />`;
+
+      for (let i = 0; i < parsed.length; i++) {
+        const p = parsed[i];
+        const tx = x(p.monthMs);
+        const monthLabel = p.bulletin_month.slice(0, 7);
+        svg += `<text x="${tx}" y="${h - 30}" text-anchor="middle" font-size="10" fill="#516078">${monthLabel}</text>`;
+      }
+
+      let line = '';
+      parsed.forEach((p, i) => {
+        if (p.parsed.date === null) return;
+        const cx = x(p.monthMs), cy = y(p.parsed.date);
+        line += `${i === 0 ? 'M' : ' L'} ${cx} ${cy}`;
+      });
+      svg += `<path d="${line}" stroke="#2f80ed" stroke-width="2.3" fill="none" />`;
+
+      parsed.forEach((p) => {
+        const cx = x(p.monthMs);
+        if (p.parsed.type === 'U') {
+          svg += `<circle cx="${cx}" cy="${h-bottom}" r="5" fill="#e11d48"><title>${p.bulletin_month.slice(0,7)}: U</title></circle>`;
+          return;
+        }
+        const cy = y(p.parsed.date);
+        const color = p.parsed.type === 'C' ? '#16a34a' : '#2f80ed';
+        svg += `<circle cx="${cx}" cy="${cy}" r="4" fill="${color}"><title>${p.bulletin_month.slice(0,7)}: ${p.cutoff}</title></circle>`;
+      });
+
+      chartEl.innerHTML = svg;
+      metaEl.textContent = `最后更新时间：${source.updated_at} ｜ 当前视图：${categoryEl.value} / ${chartTypeEl.value} ｜ 共 ${records.length} 条记录`;
+    }
+
+    Promise.resolve(fetch('/data/visa_bulletin_cn_eb.json'))
+      .then(r => r.json())
+      .then(json => {
+        source = json;
+        render();
+      })
+      .catch(() => {
+        chartEl.innerHTML = '<text x="20" y="30">数据加载失败，请检查 data 文件路径。</text>';
+      });
+
+    categoryEl.addEventListener('change', render);
+    chartTypeEl.addEventListener('change', render);
+  </script>
+</body>
+</html>

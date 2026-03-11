@@ -1,0 +1,41 @@
+{
+  "updated_at": "2026-03-01",
+  "source_note": "Sample historical values for MVP visualization; replace with official Visa Bulletin monthly updates.",
+  "records": [
+    {"bulletin_month":"2025-04-01","category":"EB2","chart_type":"FAD","cutoff":"2020-10-01"},
+    {"bulletin_month":"2025-05-01","category":"EB2","chart_type":"FAD","cutoff":"2020-10-01"},
+    {"bulletin_month":"2025-06-01","category":"EB2","chart_type":"FAD","cutoff":"2020-11-08"},
+    {"bulletin_month":"2025-07-01","category":"EB2","chart_type":"FAD","cutoff":"2020-12-15"},
+    {"bulletin_month":"2025-08-01","category":"EB2","chart_type":"FAD","cutoff":"2020-12-15"},
+    {"bulletin_month":"2025-09-01","category":"EB2","chart_type":"FAD","cutoff":"2021-01-01"},
+    {"bulletin_month":"2025-10-01","category":"EB2","chart_type":"FAD","cutoff":"2021-01-15"},
+    {"bulletin_month":"2025-11-01","category":"EB2","chart_type":"FAD","cutoff":"2021-02-01"},
+
+    {"bulletin_month":"2025-04-01","category":"EB3","chart_type":"FAD","cutoff":"2020-11-01"},
+    {"bulletin_month":"2025-05-01","category":"EB3","chart_type":"FAD","cutoff":"2020-11-15"},
+    {"bulletin_month":"2025-06-01","category":"EB3","chart_type":"FAD","cutoff":"2020-12-01"},
+    {"bulletin_month":"2025-07-01","category":"EB3","chart_type":"FAD","cutoff":"2020-12-15"},
+    {"bulletin_month":"2025-08-01","category":"EB3","chart_type":"FAD","cutoff":"2021-01-01"},
+    {"bulletin_month":"2025-09-01","category":"EB3","chart_type":"FAD","cutoff":"2021-01-15"},
+    {"bulletin_month":"2025-10-01","category":"EB3","chart_type":"FAD","cutoff":"2021-02-01"},
+    {"bulletin_month":"2025-11-01","category":"EB3","chart_type":"FAD","cutoff":"2021-02-08"},
+
+    {"bulletin_month":"2025-04-01","category":"EB2","chart_type":"DOF","cutoff":"2020-11-01"},
+    {"bulletin_month":"2025-05-01","category":"EB2","chart_type":"DOF","cutoff":"2020-11-01"},
+    {"bulletin_month":"2025-06-01","category":"EB2","chart_type":"DOF","cutoff":"2020-12-01"},
+    {"bulletin_month":"2025-07-01","category":"EB2","chart_type":"DOF","cutoff":"2021-01-01"},
+    {"bulletin_month":"2025-08-01","category":"EB2","chart_type":"DOF","cutoff":"2021-01-15"},
+    {"bulletin_month":"2025-09-01","category":"EB2","chart_type":"DOF","cutoff":"2021-02-01"},
+    {"bulletin_month":"2025-10-01","category":"EB2","chart_type":"DOF","cutoff":"C"},
+    {"bulletin_month":"2025-11-01","category":"EB2","chart_type":"DOF","cutoff":"C"},
+
+    {"bulletin_month":"2025-04-01","category":"EB3","chart_type":"DOF","cutoff":"2020-12-01"},
+    {"bulletin_month":"2025-05-01","category":"EB3","chart_type":"DOF","cutoff":"2020-12-15"},
+    {"bulletin_month":"2025-06-01","category":"EB3","chart_type":"DOF","cutoff":"2021-01-01"},
+    {"bulletin_month":"2025-07-01","category":"EB3","chart_type":"DOF","cutoff":"2021-01-15"},
+    {"bulletin_month":"2025-08-01","category":"EB3","chart_type":"DOF","cutoff":"2021-02-01"},
+    {"bulletin_month":"2025-09-01","category":"EB3","chart_type":"DOF","cutoff":"2021-02-15"},
+    {"bulletin_month":"2025-10-01","category":"EB3","chart_type":"DOF","cutoff":"U"},
+    {"bulletin_month":"2025-11-01","category":"EB3","chart_type":"DOF","cutoff":"2021-03-01"}
+  ]
+}
